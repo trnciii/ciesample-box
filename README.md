@@ -22,7 +22,7 @@
 ## プログラムの概要
 このプログラムでは、これまでの平行投影法と違い **透視投影法** によって立方体を描画しています。
 main.cpp の中にある関数`display()`の中で` makebox(1.0, 1.0, 1.0);`という関数が使用されており、これで以下の図のように幅, 高さ, 奥行がそれぞれ1である立方体を描画します。<br>
-![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/makebox.jpg)
+![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/makebox.jpg)
 
 ### 立方体の描画
 立方体を作る関数` makebox`は、box.hpp, box.cpp という2つのファイルの中に定義されています。<br>
@@ -50,7 +50,7 @@ gluPerspective();では透視投影法の視体積を設定しています。
 括弧左から、視野角、縦横比、手前の座標、奥の座標を設定し、この範囲内にある物体を表示します。
 
 `gluPerspactive(th, w/h, near, far)`のとき次の図のようになります<br>
-![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/viewport2.jpg)
+![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/viewport2.jpg)
 
 関数`gluLookAt`は視点の設定をしています。
 最初の３つのパラメータは視点の位置です。次の３つのパラメータは注視点の位置を表しています。このサンプルでは、カメラは位置(3.0, 4.0, 5.0)から原点(0.0, 0.0, 0.0) のほうを向いています。
@@ -119,17 +119,17 @@ void display(void)
 
 ## 課題1
 前回までのプログラムを参考に、箱を増殖させて次のようなものを作ってみてください。<br>
-<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/boxes2.PNG" width="300">
-<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/boxes3.PNG" width="300">
-<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/boxes4.PNG" width="300">
+<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/boxes2.PNG" width="300">
+<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/boxes3.PNG" width="300">
+<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/boxes4.PNG" width="300">
 
 ## 階層構造
 ボックスが綺麗に表示できるようになったところで、すこし複雑な表現をおこなってみましょう。このように複数のボックスがあるとします。<br>
-![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/boxes.jpg)<br>
+![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/boxes.jpg)<br>
 
 <!-- ### 課題2
 下図のようにオブジェクトを配置してください。色や形は自由に変えていいです。<br>
-![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/boxes.jpg)<br> -->
+![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/boxes.jpg)<br> -->
 
 ### 階層構造とは
 ここで、Bのオブジェクトを動かすとAやCが一緒に動くようにするにはどうしたらいいでしょうか。
@@ -138,16 +138,16 @@ void display(void)
 
 |   幹を動かせば木全体が動く(理想)    |   幹を動かしても葉や枝が残ってしまう場合 |
 |:------------------------------:|:-------------------------------:|
-|![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/tree_all.jpg)|![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/tree_sep.jpg)|
+|![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/tree_all.jpg)|![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/tree_sep.jpg)|
 
 これは、階層構造をつくる＝オブジェクトの間に親子関係をつくることで実現できます。<br>
-![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/oyako_1.gif)
+![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/oyako_1.gif)
 
 例えば、AがBの親のとき、Aが動くとBもAとの位置関係を保ったままついてきます。<br>
-![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/oyako_2.gif)
+![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/oyako_2.gif)
 
 Aがその場で回転するとどうなるでしょう？BはAの周りをぐるぐると回ることになります。<br>
-![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/oyako_3.gif)
+![](http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/oyako_3.gif)
 
 一方Bがどんなに動いても、Aがついてきたりはしません。Bが拡大・縮小しても、その場で回転しても、Aには全く影響がありません。しかしやっぱり、散々Bが動いてAとの距離が相当に離れてしまっても、Aが移動するとその位置関係を保ったままBはついてきます。
 
@@ -185,8 +185,8 @@ glPopMatrix(); // 階層を戻る
 
 ### 課題2
 階層構造を使ってロボットを作って下さい。単純なものでもいいですし、人型のような複雑なものに挑戦してもいいです。胴体を動かすと脚や腕がついてくるといった操作が可能なものをつくり、さまざまな姿勢をとらせてください。<br>
-<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/boxes.jpg" width="300">
-<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cge2020/img/3d/robo.GIF" width="300">
+<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/boxes.jpg" width="300">
+<img src="http://www.design.kyushu-u.ac.jp/~rtsuruno/lectures/cie2022/img/3d/robo.GIF" width="300">
 
 できた画像をキャプチャして、slackのほうに共有してくれると嬉しいです。
 
